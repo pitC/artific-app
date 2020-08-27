@@ -1,21 +1,15 @@
-var MongoClient = require("mongodb").MongoClient;
-var BSON = require("mongodb").BSONPure;
-var ObjectId = require("mongodb").ObjectID;
-var url = process.env.MONGODB_URI || "mongodb://localhost:27017";
 const os = require('os');
 const crypto = require('crypto');
-const COLLECTION = "img-metadata";
-const BASE_FILE_URL = "/previews/staedel/";
-var initiated = false;
-var db;
+const TABLE_NAME = "artific-img-metadata";
 
-function buildIdObject(id) {
-  try {
-    return new ObjectId(id);
-  } catch (err) {
-    return id;
-  }
-}
+
+let AWS = require("aws-sdk");
+AWS.config.update({
+    region: "eu-west-2"
+});
+
+let docClient = new AWS.DynamoDB.DocumentClient();
+
 
 function generateId(){
     
@@ -25,64 +19,27 @@ function generateId(){
     const counter = process.hrtime()[1].toString(16).slice(0, 6).padStart(6, '0');
     return secondInHex + machineId + processId + counter;
 }
-
-exports.getTargetURL = function(filename) {
-  return BASE_FILE_URL + filename;
-};
-
-exports.initDB = function(dropCollection, callback) {
-  MongoClient.connect(url, function(err, database) {
-    if (err) throw err;
-    db = database.db = database.db();
-
-    // db.createCollection(COLLECTION, function(err, res) {
-    //   if (err) throw err;
-    //   console.log("Collection " + COLLECTION + " created on " + url);
-    // });
-    callback();
-  });
-};
-if (!initiated) {
-  this.initDB(null, function() {
-    initiated = true;
-    console.log("Database created/connected: " + initiated);
-  });
-}
-
 exports.addObject = function(newObject, okCallback, errCallback) {
   if (newObject) {
     newObject._id = generateId();
-    db.collection(COLLECTION, function(err, collection) {
-      collection.insertOne(newObject, { safe: true }, function(
-        err,
-        dbResponse
-      ) {
-        if (err) {
-          console.log(err);
-          errCallback(err);
-        } else {
-          var createdObject = dbResponse.ops[0];
-          okCallback(createdObject);
-        }
-      });
-    });
   } else errCallback(null);
 };
 
 exports.findById = function(id, okCallback, errCallback) {
-  var self = this;
-  db.collection(COLLECTION, function(err, collection) {
-    collection.findOne({ _id: buildIdObject(id) }, function(err, item) {
-      if (err) {
-        errCallback(err);
-      } else if (item) {
-        // item.fileURL = self.getTargetURL(item.filename);
-        okCallback(item);
-      } else {
-        okCallback(null);
-      }
-    });
-  });
+  let params = {
+    Key: {
+      _id: id
+    },
+    TableName:TABLE_NAME
+  }
+  docClient.get(params,function(err,data){
+    if (err){
+      errCallback(err);
+    }
+    else{
+      okCallback(data.Item);
+    }
+  })
 };
 
 exports.findByAttribute = function(attribute, value, okCallback, errCallback) {
