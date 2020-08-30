@@ -1,5 +1,4 @@
-let metadataDao = require("aws-dao");
-// let metadataDao = require("./../../db_migration/aws-dao")
+let metadataDao = require("./aws-dao");
 
 function buildResponse(code,payload){
     let response = {}
@@ -37,7 +36,11 @@ function getImage(request,callback){
 
 exports.handler = function(event,context,callback) {
     console.log(event)
-    getImage(event.pathParameters["id"]||null,callback)
+    let imageId = null
+    if (event.pathParameters){
+        imageId = event.pathParameters["id"]||null
+    }
+    getImage(imageId,callback)
     //callback(undefined,{statusCode:200,body:JSON.stringify(event)});
 };
-getImage("5bfc5d5d6ba9b622d2aff9e5");
+// getImage("5bfc5d5d6ba9b622d2aff9e5");

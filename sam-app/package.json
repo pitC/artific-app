@@ -1,0 +1,13 @@
+{
+    "name": "artific-app",
+    "description": "artific-app",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {},
+    "devDependencies": {
+        "jest": "^24.7.1"
+    },
+    "scripts": {
+        "test": "jest"
+    }
+}

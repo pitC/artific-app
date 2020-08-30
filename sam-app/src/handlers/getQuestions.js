@@ -1,4 +1,4 @@
-var questionnaire = require("questionnaire.json")
+var questionnaire = require("./app/interview/questionnaire.json")
 var questionSet = [];
 Object.keys(questionnaire).forEach(function(key, index) {
   var qId = key;
@@ -13,13 +13,15 @@ Object.keys(questionnaire).forEach(function(key, index) {
 });
 
 function getQuestions() {
-  
-  return questionSet;
+  response = {
+    statusCode: 200,
+    body: JSON.stringify(questionSet),
+};
+  return response;
 }
 
 exports.handler = async (event) => {
-    // TODO implement
     console.log(event)
-    const response = getQuestions();
+    let response = getQuestions();
     return response;
 };
