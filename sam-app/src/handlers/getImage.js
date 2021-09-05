@@ -1,4 +1,4 @@
-let metadataDao = require("./aws-dao");
+let metadataDao = require("./app/aws-dao");
 
 function buildResponse(code,payload){
     let response = {}

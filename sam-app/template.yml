@@ -59,3 +59,38 @@ Resources:
             Properties:
               Path: /questions
               Method: GET
+  getArConfigFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: src/handlers/getConfig.arConfigHandler
+        Runtime: nodejs12.x
+        MemorySize: 128
+        Timeout: 100
+        Description: A Lambda function that returns AR config.
+        Policies:
+          # Give Lambda basic execution Permission to the helloFromLambda
+          - AWSLambdaBasicExecutionRole
+        Events:
+          Api:
+            Type: Api
+            Properties:
+              Path: /arconfig
+              Method: GET
+  recommendFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/recommend.handler
+      Runtime: nodejs12.x
+      MemorySize: 128
+      Timeout: 100
+      Description: A Lambda function that returns questionnaire.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Role: arn:aws:iam::423767207682:role/service-role/myLambdaExecRole
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /recommend
+            Method: POST

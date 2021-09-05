@@ -1,19 +1,17 @@
-var metadataDao = require("./../db/metadata-dao");
-const VIBRANCE_SELECTOR = require("./selectors/vibranceSelector");
-const VIBRANCE_MUTED_SELECTOR = require("./selectors/vibranceMutedSelector");
-const PALLETTE_SELECTOR = require("./selectors/paletteSelector");
+var metadataDao = require("./aws-dao");
+// const VIBRANCE_SELECTOR = require("./selectors/vibranceSelector");
+// const VIBRANCE_MUTED_SELECTOR = require("./selectors/vibranceMutedSelector");
+// const PALLETTE_SELECTOR = require("./selectors/paletteSelector");
 
-const WEIGHTED_PALLETTE_SELECTOR = require("./selectors/paletteWeightedSelector");
 const WEIGHTED_PALLETTE_METADATA_SELECTOR = require("./selectors/paletteMetadataWeightedSelector");
 const colourUtils = require("./colourUtils");
 const DEFAULT_SELECTOR = WEIGHTED_PALLETTE_METADATA_SELECTOR;
 
 var selector = null;
 var selectors = {
-  "Vibrance only": VIBRANCE_SELECTOR,
-  "Muted and vibrance same weight": VIBRANCE_MUTED_SELECTOR,
-  "Complete palette": PALLETTE_SELECTOR,
-  "Weighted palette": WEIGHTED_PALLETTE_SELECTOR,
+  // "Vibrance only": VIBRANCE_SELECTOR,
+  // "Muted and vibrance same weight": VIBRANCE_MUTED_SELECTOR,
+  // "Complete palette": PALLETTE_SELECTOR,
   "Weighted metadata palette": WEIGHTED_PALLETTE_METADATA_SELECTOR
 };
 
@@ -64,9 +62,12 @@ function questionsAvailable(criteria) {
 
 exports.getRecommendation = function(criteria, callback) {
   initSelector(criteria);
+  console.log("RECOM ENGINE: start")
   if (criteria.enhance) {
     enhancePalette(criteria, function(enhancedCriteria) {
+      console.log("RECOM ENGINE: palette enhanced")
       fetchImages(enhancedCriteria, function(fetchedImages) {
+        console.log("RECOM ENGINE: images fetched")
         prepareRecommendation(fetchedImages, enhancedCriteria, function(
           recommendedImages
         ) {
@@ -75,6 +76,7 @@ exports.getRecommendation = function(criteria, callback) {
             paletteUsed: enhancedCriteria.colours,
             questionsAvailable: questionsAvailable(criteria)
           };
+          console.log("RECOM ENGINE: recomm ready")
           callback(response);
         });
       });

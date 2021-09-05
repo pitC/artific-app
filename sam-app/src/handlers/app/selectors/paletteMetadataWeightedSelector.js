@@ -5,8 +5,6 @@ const DISTANCE_LIMIT = 200;
 const COLOUR_WEIGHTS = [10, 30, 60, 0, 0, 0, 0, 0, 0, 0];
 const PALETTE_METADATA_WEIGHTS = [1, 1];
 
-var metadataDao = require("../../db/metadata-dao");
-
 function sortByDistance(imgA, imgB) {
   if (imgA.sortValue > imgB.sortValue) {
     return 1;

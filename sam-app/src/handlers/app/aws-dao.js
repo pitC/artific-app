@@ -60,6 +60,8 @@ exports.findByAttribute = function(attribute, value, okCallback, errCallback) {
   });
 };
 
+let cachedItems = null
+
 exports.findImages = function(criteria, limit, okCallback, errCallback) {
   var query = "";
   // if (criteria.subdomain) {
@@ -72,18 +74,25 @@ exports.findImages = function(criteria, limit, okCallback, errCallback) {
   // else {
   //   query = { subdomain: { $exists: false } };
   // }
-  db.collection(COLLECTION, function(err, collection) {
-    collection
-      .find(query)
-      .limit(limit)
-      .toArray(function(err, items) {
-        if (err) {
-          errCallback(err);
-        } else {
-          okCallback(items);
-        }
-      });
-  });
+  
+  let params = {
+    TableName:TABLE_NAME
+  }
+  if (cachedItems){
+    console.log("DAO: use cache")
+    okCallback(cachedItems);
+  
+} else{
+  docClient.scan(params,function(err,data){
+    if (err){
+      errCallback(err);
+    }
+    else{
+      cachedItems = data.Items;
+      okCallback(data.Items);
+    }
+  })
+}
 };
 
 exports.updateImage = function(object, okCallback, errCallback) {
