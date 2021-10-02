@@ -29,4 +29,4 @@ Originally the system was a web application hosted on Heroku.
 
 # Target architecture
 In the target architecture the backend gets rebuilt to make use of serverless services provided by AWS. This enables to cut the costs virtually to zero while keeping the application still online.
-![AWS serverless architecture](https://github.com/pitC/artific-app/blob/392d0e97a9ce61de33aab4dee87a43970558d19f/doc/architecture-AWS.drawio.svg)
+![AWS serverless architecture](https://github.com/pitC/artific-app/blob/53f34a3389fe0fff011f8cdc928596ac13a84ef4/doc/architecture-AWS.drawio.svg)
