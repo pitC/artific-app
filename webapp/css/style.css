@@ -1,0 +1,14 @@
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 1;
+  }
+}
+.lightblue {
+  background-color: #90ccf4;
+  border-color: #90ccf4;
+}
+.lightblue:hover,
+.lightblue:active {
+  background-color: #5da2d5;
+  border-color: #5da2d5;
+}
