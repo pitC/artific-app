@@ -23,151 +23,49 @@
   <link href="static/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/css/bootstrap-colorpicker.min.css"
+    rel="stylesheet"
+  />
 
+  <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="dist/js/Vibrant.min.js"></script>
+  <script src="dist/js/nearestColor.js"></script>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
     <link rel="shortcut icon" href="dist/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="dist/img/favicon.ico" type="image/x-icon">
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script>
-  if (navigator.serviceWorker.controller) {
-    console.log('[PWA Builder] active service worker found, no need to register')
-  } else {
-    //Register the ServiceWorker
-    navigator.serviceWorker.register('pwabuilder-sw.js', {
-      scope: './'
-    }).then(function (reg) {
-      console.log('Service worker has been registered for scope:' + reg.scope);
-    });
-  }
-  window.addEventListener("beforeinstallprompt", function (e) {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.prompt();
-    console.log("Before install prompt");
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
 
-  });
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130314594-1"></script>
-<script>
-  var host = window.location.hostname;
-  if (host != "localhost"){
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-130314594-1');
-  }
-</script>
- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
- <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
- <script>
- window.addEventListener("load", function(){
- window.cookieconsent.initialise({
-   "palette": {
-     "popup": {
-       "background": "#f8f9fa",
-       "text": "#6c757d"
-     },
-     "button": {
-       "background": "#90ccf4",
-       "text": "#ffffff"
-     }
-   },
-   "content": {
-     "message": "We use cookies  for traffic analytics, we store no personal details. It's just between you and the art.",
-     "href": "https://artific.app/privacypolicy.html"
-   }
- })});
- </script>
 </head>
 
 <body>
+  <div id="turn">
+    <div
+      class="d-flex flex-column justify-content-center align-items-center p-5"
+    >
+      <h2>Landscape detected</h2>
 
- 
-
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler border-0 p-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#"><img src="dist/img/logo_bunt.png" alt="artific logo" id="logo-nav" class="img-fluid"></a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="museum.html">For museums</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="impressum.html">Legal Disclosure</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="privacypolicy.html">Privacy policy</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="som-wrapper"
-              href="https://twitter.com/AppArtific"
-              target="_blank"
-              ><i id="twitter-icon" class="fab fa-twitter pl-lg-3"></i
-            ></a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="som-wrapper"
-              href="https://www.instagram.com/artific.app/"
-              target="_blank"
-              ><i id="insta-icon" class="fab fa-instagram pl-lg-3"></i></i
-            ></a>
-          </li>
-        </ul>
-      </div>
-      <span class="navbar-text">
-
-      </span>
-  
-    </nav>
-    <div class="container-fluid">
-
-
-      
-    <div class="container">
-
-
-      <div class="box box-1">
-        <img src="dist/img/logo_white.png" alt="artific logo" id="logo-index" class="img-fluid">
-        
-      </div>
-      <div class="text-light box box-2">
-       
-          <p class="lead intro-text">We recommend you artworks matching your <b>color scheme</b> and <b>taste</b>. Take a picture or answer a few questions in order to <b>discover</b> over 1900 masterpieces, <b>preview</b> them on your wall with <b>augmented reality</b>, <b>download</b> the high-resolutions files for free or <b>order</b> the prints.</p> 
-         <!-- <p class="lead bold">Artific is a free online tool for everybody.<br>For more art in your everyday life.</p>-->
-       
-      </div>
-      <div class="box box-3 pt-1">
-
-        <div class="mt-auto mt-md-0">
-          <a role="button" class="btn custom-standard btn-block" href="app/photo-input">
-            <i class="fas fa-camera"></i> Take a photo
-          </a>
-          <a role="button" class="btn custom-standard btn-block" href="app/question"><i class="fab fa-fly"></i> Discover
-          </a>
-        </div>
-      </div>
+      <h5>(and by this we mean your phone)</h5>
+      <span class="h2 p-3"><i class="fas fa-sync-alt"></i></span>
+      <p>
+        This content is best experienced with your device in portrait mode
+      </p>
+      <p>Please rotate your phone for optimal display. Thank you.</p>
     </div>
+  </div>
+    <span id="vue-app"><router-view></router-view></span>
+      
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/js/bootstrap-colorpicker.min.js"></script>
+    <script type="module" src="../js/vueappRouted.js"></script>
+    <script nomodule src="../dist/build.js"></script>
 </body>
 
 </html>

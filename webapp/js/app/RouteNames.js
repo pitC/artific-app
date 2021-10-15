@@ -1,9 +1,10 @@
 export default {
-  PHOTO_INPUT: "/app/photo-input",
-  COLOUR_PICKER_INPUT: "/app/colour-picker",
-  RESULT_LIST: "/app/results",
-  QUESTION: "/app/question",
-  IMAGE_DETAILS: "/app/image/:id",
-  PREVIEW: "/app/preview",
-  CHECKOUT: "/app/checkout"
+  PHOTO_INPUT: "/photo-input",
+  COLOUR_PICKER_INPUT: "/colour-picker",
+  RESULT_LIST: "/results",
+  QUESTION: "/question",
+  IMAGE_DETAILS: "/image/:id",
+  PREVIEW: "/preview",
+  CHECKOUT: "/checkout",
+  INDEX:"/"
 };

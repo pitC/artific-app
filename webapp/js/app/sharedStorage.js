@@ -128,6 +128,7 @@ export default {
   },
 
   getRandomQuestion: function(callback) {
+    console.log("Getting questions!")
     var self = this;
     function pickRandom(cb) {
       var index = Math.floor(Math.random() * self.questionSet.length);

@@ -17,7 +17,7 @@ export default {
   <button class="btn btn-secondary dropdown-toggle custom-switch" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fas fa-palette"></i>  By colour</button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" :href="photoInputRoute"><i class="fas fa-camera"></i> By camera</a>
+    <a class="dropdown-item" v-on:click="onToPhotoPicker"><i class="fas fa-camera"></i> By camera</a>
   </div>
 </div>
 </div>
@@ -224,6 +224,9 @@ export default {
         $("#colour-pick").colorpicker("setValue", colour);
       }
     },
+    onToPhotoPicker: function(event){
+      this.$router.push(RouteNames.PHOTO_INPUT);
+    },
     onCommitColours: function(event) {
       var selectedColours = this.getManualColours();
 
@@ -288,5 +291,6 @@ export default {
     for (var i = 0; i < maxI; i++) {
       this.$set(this.colours, i, storedColours[i]);
     }
+    console.log("Colour picker mounted!")
   }
 };

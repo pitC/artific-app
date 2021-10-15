@@ -122,7 +122,7 @@ export default {
     <button class="btn btn-secondary dropdown-toggle custom-switch" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-camera"></i> By photo</button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" :href="colourPickerRoute"><i class="fas fa-palette"></i> By colour</a>
+      <a class="dropdown-item" v-on:click="onToManualMode"><i class="fas fa-palette"></i> By colour</a>
     </div>
   </div>
 </div>
@@ -258,6 +258,11 @@ export default {
       } else {
         this.state = VIDEO_PREVIEW_MODE;
       }
+    },
+    onToManualMode:function(event){
+      this.$router.push({
+        path: RouteNames.COLOUR_PICKER_INPUT
+      });
     },
     onTakeSnapshot: function(event) {
       var video = this.$refs.video;
