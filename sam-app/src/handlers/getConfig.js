@@ -15,7 +15,9 @@ function buildResponse(request){
     //     arConfig.frameConfig.showFrame = false;
     // }
     let response = {
-        statusCode: 200,
+        statusCode: 200,headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify(arConfig),
     };
     return response;

@@ -8,13 +8,17 @@ function buildResponse(code, payload) {
     let response = {}
     if (payload) {
         response = {
-            statusCode: code,
+            statusCode: code,headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(payload),
         };
     }
     else {
         response = {
-            statusCode: code,
+            statusCode: code,headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: ""
         }
     }
