@@ -3,7 +3,7 @@ Artific is a free personal art recommendation tool.
 We recommend you artworks matching your color scheme and taste, let you preview them on your wall with augmented reality and share and / or download them in a high-resolution in order to print at a local print shop.
 For some artworks you can even order a high-quality print with one click!
 Originally the project was created as part of the Coding da Vinci, a German hackathon for open cultural data, winning the ["Everybody's darling" prize](https://codingdavinci.de/projects/2018_rm/Artific.html).
-Sadly, the application is offline at the moment and this repository is an attempt to revive project and redisgn it to a serverless solution based on AWS. The original code is still available [here](https://github.com/pitC/digital_art_consultant).
+A rearchitected, serverless-based solution is up and running under https://artific.app. Give it a try! The original code is still available [here](https://github.com/pitC/digital_art_consultant).
 
 # How does Artific work?
 
